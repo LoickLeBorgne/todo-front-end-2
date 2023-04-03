@@ -5,12 +5,24 @@ let id = searchParams.get('id');
 let isLtodoTask = false;
 let lTodo = null;
 let lTodos = JSON.parse(localStorage.getItem('tasks'));
-lTodos.forEach(todo => {
-  if (todo.id == id) {
-    isLtodoTask = true;
-    lTodo = todo;
-  }
-});
+
+
+//vérifier si la valeur de lTodos est nulle 
+// avant d'appeler la méthode forEach().
+if (Array.isArray(lTodos) && lTodos !== null) {
+  lTodos.forEach(todo => {
+    if (todo.id == id) {
+      isLtodoTask = true;
+      lTodo = todo;
+    }
+
+  });
+
+
+
+}
+
+
 if (isLtodoTask) {
   const listDiv = document.createElement('div');
   listDiv.id = 'list';
