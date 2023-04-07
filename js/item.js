@@ -71,21 +71,19 @@ if (isLtodoTask) {
 
   // Quand on click sur le boutton supprimer
   deleteButton.onclick = () => {
-    if (isCompleteElement.classList.contains('done')) {
-      listDiv.removeChild(todoDiv);
-    } else {
-      alert("L'élément doit être réalisé pour être supprimé.");
-    }
+    deleteTask(todoDiv);
   };
 
 
   // Quand on click sur le boutton modifier
   updateButton.onclick = () => {
-    lTodo.is_complete = !lTodo.is_complete;
+    updateButton(lTodo);
+  };
 
-    // Mettre à jour l'affichage de l'état de la tâche
-    isCompleteElement.innerHTML = lTodo.is_complete ? 'Status : Terminé' : 'Status : À faire';
-    isCompleteElement.classList.replace(lTodo.is_complete ? 'not-done' : 'done', lTodo.is_complete ? 'done' : 'not-done');
+
+
+  openButton.onclick = () => {
+    updateTask(lTodo, isCompleteElement);
   };
 
   // On affiche les boutons
@@ -163,21 +161,13 @@ if (isLtodoTask) {
 
       // Quand on click sur le boutton supprimer
       deleteButton.onclick = () => {
-        if (isCompleteElement.classList.contains('done')) {
-          listDiv.removeChild(todoDiv);
-        } else {
-          alert("L'élément doit être réalisé pour être supprimé.");
-        }
+        deleteTask(todoDiv);
       };
 
 
       // Quand on click sur le boutton modifier
       updateButton.onclick = () => {
-        todo.is_complete = !todo.is_complete;
-
-        // Mettre à jour l'affichage de l'état de la tâche
-        isCompleteElement.innerHTML = todo.is_complete ? 'Status : Terminé' : 'Status : À faire';
-        isCompleteElement.classList.replace(todo.is_complete ? 'not-done' : 'done', todo.is_complete ? 'done' : 'not-done');
+        updateTask(todo, isCompleteElement);
       };
 
       // On affiche les boutons
@@ -218,3 +208,26 @@ function updateTaskStatus(id, status) {
     .catch(error => console.error(error));
 }
 
+function deleteTask(todoDiv){
+  if (isCompleteElement.classList.contains('done')) {
+    listDiv.removeChild(todoDiv);
+  } else {
+    alert("L'élément doit être réalisé pour être supprimé.");
+  }
+}
+
+function updateTask(lTodo, isCompleteElement){
+  lTodo.is_complete = !lTodo.is_complete;
+
+  // Mettre à jour l'affichage de l'état de la tâche
+  isCompleteElement.innerHTML = lTodo.is_complete ? 'Status : Terminé' : 'Status : À faire';
+  isCompleteElement.classList.replace(lTodo.is_complete ? 'not-done' : 'done', lTodo.is_complete ? 'done' : 'not-done');
+}
+
+function openButton(lTodo){
+  lTodo.is_complete = !lTodo.is_complete;
+
+    // Mettre à jour l'affichage de l'état de la tâche
+    isCompleteElement.innerHTML = lTodo.is_complete ? 'Status : Terminé' : 'Status : À faire';
+    isCompleteElement.classList.replace(lTodo.is_complete ? 'not-done' : 'done', lTodo.is_complete ? 'done' : 'not-done');
+}
